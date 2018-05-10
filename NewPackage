@@ -1,0 +1,31 @@
+#!/bin/sh
+ScriptDir=`dirname $0`
+source ${ScriptDir}/components/vars.sh
+
+if test -z "$1"; then
+	echo "Usage: $0 <PackageName>"
+	exit 0
+fi
+
+PackageName=$1
+
+if test    ! -d src \
+	-o ! -d test \
+	-o ! -d include; then
+	echo "This project directory is broken..."
+	exit 1
+fi
+
+MakeDirectory(){
+	if test ! -d "$1"; then
+		echo "Makes \"$1\" directory..."
+		mkdir "$1"
+	fi
+}
+
+MakeDirectory "src/${PackageName}"
+MakeDirectory "test/${PackageName}"
+MakeDirectory "include/${PackageName}"
+
+echo "Done."
+cd ${OriginDir}

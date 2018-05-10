@@ -1,0 +1,11 @@
+#!/bin/sh
+ScriptDir=`dirname $0`
+source ${ScriptDir}/components/vars.sh
+
+if test -z "$1" -o -z "$2"; then
+	echo "Usage: $0 <ClassName> <PackageName>"
+	exit 0
+fi
+
+source ${ScriptDir}/components/GenerateSources ClassName cpp Class $1 $2
+
